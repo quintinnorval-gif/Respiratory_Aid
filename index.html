@@ -378,6 +378,44 @@
       cursor: pointer;
       font-weight: 700;
       font-size: 0.93rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tab-btn.lo-btn::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      margin-right: 8px;
+      vertical-align: middle;
+      background: currentColor;
+      opacity: 0.9;
+    }
+
+    .anatomy-card .tab-btn.lo-btn:not(.active) {
+      color: var(--anatomy);
+      border-color: #7dd3fc;
+      background: #f0f9ff;
+    }
+
+    .physiology-card .tab-btn.lo-btn:not(.active) {
+      color: var(--physiology);
+      border-color: #86efac;
+      background: #f0fdf4;
+    }
+
+    .regulation-card .tab-btn.lo-btn:not(.active) {
+      color: var(--regulation);
+      border-color: #fca5a5;
+      background: #fef2f2;
+    }
+
+    .cases-card .tab-btn:not(.active) {
+      color: var(--cases);
+      border-color: #c4b5fd;
+      background: #f5f3ff;
     }
 
     .tab-btn.active {
@@ -424,6 +462,18 @@
       font-size: 0.97rem;
     }
 
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 14px;
+    }
+
+    .table-wrap table {
+      min-width: 520px;
+      margin: 0;
+    }
+
     th, td {
       border: 1px solid var(--border);
       padding: 10px 12px;
@@ -464,6 +514,33 @@
 
     @media (max-width: 900px) {
       .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .tab-buttons {
+        gap: 6px;
+        padding: 10px;
+      }
+
+      .tab-btn {
+        padding: 9px 10px;
+        font-size: 0.84rem;
+      }
+
+      .tab-btn.lo-btn::before {
+        width: 8px;
+        height: 8px;
+        margin-right: 6px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .table-wrap {
+        border: 1px solid var(--border);
+        background: white;
+      }
     }
   </style>
 </head>
@@ -527,12 +604,12 @@
 
           <div class="outcome-tabs" data-tab-group>
             <div class="tab-buttons">
-              <button class="tab-btn active" data-tab="a-lo1">LO 1</button>
-              <button class="tab-btn" data-tab="a-lo2">LO 2</button>
-              <button class="tab-btn" data-tab="a-lo3">LO 3</button>
-              <button class="tab-btn" data-tab="a-lo4">LO 4</button>
-              <button class="tab-btn" data-tab="a-lo5">LO 5</button>
-              <button class="tab-btn" data-tab="a-lo6">LO 6</button>
+              <button class="tab-btn lo-btn active" data-tab="a-lo1">LO 1</button>
+              <button class="tab-btn lo-btn" data-tab="a-lo2">LO 2</button>
+              <button class="tab-btn lo-btn" data-tab="a-lo3">LO 3</button>
+              <button class="tab-btn lo-btn" data-tab="a-lo4">LO 4</button>
+              <button class="tab-btn lo-btn" data-tab="a-lo5">LO 5</button>
+              <button class="tab-btn lo-btn" data-tab="a-lo6">LO 6</button>
             </div>
             <div id="a-lo1" class="tab-panel active">
               <h4>Learning Outcome 1 Answer</h4>
@@ -628,16 +705,16 @@
 
           <div class="outcome-tabs" data-tab-group>
             <div class="tab-buttons">
-              <button class="tab-btn active" data-tab="p-lo1">LO 1</button>
-              <button class="tab-btn" data-tab="p-lo2">LO 2</button>
-              <button class="tab-btn" data-tab="p-lo3">LO 3</button>
-              <button class="tab-btn" data-tab="p-lo4">LO 4</button>
-              <button class="tab-btn" data-tab="p-lo5">LO 5</button>
-              <button class="tab-btn" data-tab="p-lo6">LO 6</button>
-              <button class="tab-btn" data-tab="p-lo7">LO 7</button>
-              <button class="tab-btn" data-tab="p-lo8">LO 8</button>
-              <button class="tab-btn" data-tab="p-lo9">LO 9</button>
-              <button class="tab-btn" data-tab="p-lo10">LO 10</button>
+              <button class="tab-btn lo-btn active" data-tab="p-lo1">LO 1</button>
+              <button class="tab-btn lo-btn" data-tab="p-lo2">LO 2</button>
+              <button class="tab-btn lo-btn" data-tab="p-lo3">LO 3</button>
+              <button class="tab-btn lo-btn" data-tab="p-lo4">LO 4</button>
+              <button class="tab-btn lo-btn" data-tab="p-lo5">LO 5</button>
+              <button class="tab-btn lo-btn" data-tab="p-lo6">LO 6</button>
+              <button class="tab-btn lo-btn" data-tab="p-lo7">LO 7</button>
+              <button class="tab-btn lo-btn" data-tab="p-lo8">LO 8</button>
+              <button class="tab-btn lo-btn" data-tab="p-lo9">LO 9</button>
+              <button class="tab-btn lo-btn" data-tab="p-lo10">LO 10</button>
             </div>
             <div id="p-lo1" class="tab-panel active"><p>Tidal volume is the amount of air moved in a normal quiet breath, usually around 500 mL in an adult. Vital capacity is the maximum amount of air that can be exhaled after a full inspiration. Total lung capacity is the total amount of air the lungs can hold. These terms help describe lung function in measurable ways.</p></div>
             <div id="p-lo2" class="tab-panel"><p>Normal respiratory values provide an essential baseline. A normal adult respiratory rate is 12 to 20 breaths per minute. Oxygen saturation is usually 95 to 100%. PaO₂ is about 80 to 100 mmHg, PaCO₂ is 35 to 45 mmHg, and pH is 7.35 to 7.45. These values help identify whether a patient is oxygenating and ventilating adequately.</p></div>
@@ -707,15 +784,15 @@
 
           <div class="outcome-tabs" data-tab-group>
             <div class="tab-buttons">
-              <button class="tab-btn active" data-tab="r-lo1">LO 1</button>
-              <button class="tab-btn" data-tab="r-lo2">LO 2</button>
-              <button class="tab-btn" data-tab="r-lo3">LO 3</button>
-              <button class="tab-btn" data-tab="r-lo4">LO 4</button>
-              <button class="tab-btn" data-tab="r-lo5">LO 5</button>
-              <button class="tab-btn" data-tab="r-lo6">LO 6</button>
-              <button class="tab-btn" data-tab="r-lo7">LO 7</button>
-              <button class="tab-btn" data-tab="r-lo8">LO 8</button>
-              <button class="tab-btn" data-tab="r-lo9">LO 9</button>
+              <button class="tab-btn lo-btn active" data-tab="r-lo1">LO 1</button>
+              <button class="tab-btn lo-btn" data-tab="r-lo2">LO 2</button>
+              <button class="tab-btn lo-btn" data-tab="r-lo3">LO 3</button>
+              <button class="tab-btn lo-btn" data-tab="r-lo4">LO 4</button>
+              <button class="tab-btn lo-btn" data-tab="r-lo5">LO 5</button>
+              <button class="tab-btn lo-btn" data-tab="r-lo6">LO 6</button>
+              <button class="tab-btn lo-btn" data-tab="r-lo7">LO 7</button>
+              <button class="tab-btn lo-btn" data-tab="r-lo8">LO 8</button>
+              <button class="tab-btn lo-btn" data-tab="r-lo9">LO 9</button>
             </div>
             <div id="r-lo1" class="tab-panel active"><p>The respiratory centres are located in the medulla oblongata and the pons. The medulla generates the basic rhythm of breathing, while the pons helps smooth and adjust that rhythm. Together, they control automatic breathing without conscious effort.</p></div>
             <div id="r-lo2" class="tab-panel"><p>Central chemoreceptors are located in the medulla and respond mainly to carbon dioxide and pH changes. Peripheral chemoreceptors are found in the carotid and aortic bodies and respond mainly to low oxygen levels. Knowing their locations helps explain different breathing responses in health and disease.</p></div>
@@ -928,7 +1005,7 @@
 
         <div class="card glossary-card">
           <h3>Anatomy Terms</h3>
-          <table class="glossary-anatomy">
+          <div class="table-wrap"><table class="glossary-anatomy">
             <thead>
               <tr><th>Term</th><th>Definition</th></tr>
             </thead>
@@ -944,12 +1021,12 @@
               <tr><td>Respiratory membrane</td><td>The thin barrier across which oxygen and carbon dioxide diffuse.</td></tr>
               <tr><td>Pleural cavity</td><td>A fluid-filled space that reduces friction during breathing.</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <div class="card glossary-card">
           <h3>Physiology Terms</h3>
-          <table class="glossary-physiology">
+          <div class="table-wrap"><table class="glossary-physiology">
             <thead>
               <tr><th>Term</th><th>Definition</th></tr>
             </thead>
@@ -965,12 +1042,12 @@
               <tr><td>Lung compliance</td><td>The ease with which the lungs expand.</td></tr>
               <tr><td>Gas exchange</td><td>The movement of oxygen and carbon dioxide between alveoli and blood.</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <div class="card glossary-card">
           <h3>Respiration Types</h3>
-          <table class="glossary-respiration">
+          <div class="table-wrap"><table class="glossary-respiration">
             <thead>
               <tr><th>Term</th><th>Definition</th></tr>
             </thead>
@@ -980,12 +1057,12 @@
               <tr><td>Internal respiration</td><td>Gas exchange between the blood and body tissues.</td></tr>
               <tr><td>Cellular respiration</td><td>The production of ATP in cells using oxygen.</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <div class="card glossary-card">
           <h3>Gas Transport</h3>
-          <table class="glossary-transport">
+          <div class="table-wrap"><table class="glossary-transport">
             <thead>
               <tr><th>Term</th><th>Definition</th></tr>
             </thead>
@@ -995,12 +1072,12 @@
               <tr><td>Oxyhaemoglobin</td><td>Haemoglobin bound to oxygen.</td></tr>
               <tr><td>Oxyhaemoglobin curve</td><td>The relationship between oxygen and haemoglobin binding.</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <div class="card glossary-card">
           <h3>Regulation Terms</h3>
-          <table class="glossary-regulation">
+          <div class="table-wrap"><table class="glossary-regulation">
             <thead>
               <tr><th>Term</th><th>Definition</th></tr>
             </thead>
@@ -1010,12 +1087,12 @@
               <tr><td>Central chemoreceptors</td><td>Chemoreceptors that mainly respond to carbon dioxide and pH changes.</td></tr>
               <tr><td>Peripheral chemoreceptors</td><td>Chemoreceptors that mainly respond to low oxygen levels.</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <div class="card glossary-card">
           <h3>Clinical Terms</h3>
-          <table class="glossary-clinical">
+          <div class="table-wrap"><table class="glossary-clinical">
             <thead>
               <tr><th>Term</th><th>Definition</th></tr>
             </thead>
@@ -1031,12 +1108,12 @@
               <tr><td>Hyperventilation</td><td>Excess breathing that lowers carbon dioxide.</td></tr>
               <tr><td>Kussmaul breathing</td><td>Deep breathing seen in acidosis.</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <div class="card glossary-card">
           <h3>Examination Terms</h3>
-          <table class="glossary-exam">
+          <div class="table-wrap"><table class="glossary-exam">
             <thead>
               <tr><th>Term</th><th>Definition</th></tr>
             </thead>
@@ -1045,12 +1122,12 @@
               <tr><td>Percussion</td><td>Tapping the chest to assess underlying tissue density.</td></tr>
               <tr><td>Auscultation</td><td>Listening to breath sounds with a stethoscope.</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <div class="card glossary-card">
           <h3>Normal Values</h3>
-          <table class="glossary-values">
+          <div class="table-wrap"><table class="glossary-values">
             <thead>
               <tr><th>Term</th><th>Definition</th></tr>
             </thead>
@@ -1061,7 +1138,7 @@
               <tr><td>pH</td><td>7.35–7.45.</td></tr>
               <tr><td>SpO2</td><td>95–100%.</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
       </section>
 
@@ -1140,3 +1217,4 @@
   </script>
 </body>
 </html>
+
