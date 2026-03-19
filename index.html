@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Respiratory System Interactive Workbook</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --ink: #1f2937;
+      --muted: #5b6472;
+      --primary: #0f766e;
+      --primary-soft: #ccfbf1;
+      --accent: #1d4ed8;
+      --accent-soft: #dbeafe;
+      --border: #d9e1ea;
+      --warn: #92400e;
+      --warn-bg: #fef3c7;
+      --good: #166534;
+      --good-bg: #dcfce7;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0f766e 0%, #1d4ed8 100%);
+      color: white;
+      padding: 48px 20px 36px;
+    }
+
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.1;
+    }
+
+    .hero p {
+      max-width: 900px;
+      margin: 0;
+      font-size: 1.06rem;
+      opacity: 0.96;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.28);
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--primary);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.12);
+      color: white;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(246,248,251,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 12px 20px;
+    }
+
+    .nav a {
+      white-space: nowrap;
+      text-decoration: none;
+      color: var(--ink);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+
+    main {
+      padding: 26px 20px 64px;
+    }
+
+    .section {
+      margin-bottom: 34px;
+      scroll-margin-top: 90px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: clamp(1.5rem, 2.3vw, 2rem);
+    }
+
+    .subtle { color: var(--muted); }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .pill {
+      background: var(--primary-soft);
+      color: #115e59;
+      border: 1px solid #99f6e4;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .grid-2, .grid-3 {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .mini-card {
+      background: #fafcff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    h2, h3, h4 { line-height: 1.2; }
+    h3 { margin: 0 0 10px; }
+    h4 { margin: 0 0 8px; }
+    p { margin: 0 0 12px; }
+    ul { margin: 0 0 12px 18px; padding: 0; }
+    li + li { margin-top: 6px; }
+
+    .activity {
+      border-left: 5px solid var(--accent);
+      background: #f8fbff;
+    }
+
+    .note {
+      background: var(--warn-bg);
+      color: var(--warn);
+      border: 1px solid #fcd34d;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-top: 14px;
+    }
+
+    .outcome-tabs, .activity-tabs, .case-tabs {
+      margin-top: 16px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .tab-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tab-btn {
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--ink);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.93rem;
+    }
+
+    .tab-btn.active {
+      background: var(--accent-soft);
+      border-color: #93c5fd;
+      color: #1e3a8a;
+    }
+
+    .tab-panel {
+      display: none;
+      padding: 18px;
+    }
+
+    .tab-panel.active { display: block; }
+
+    .answer-box {
+      background: #fbfdff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .video-callout, .link-callout {
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+    }
+
+    .video-callout a, .link-callout a, .resource-list a {
+      color: var(--accent);
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .video-callout a:hover, .link-callout a:hover, .resource-list a:hover { text-decoration: underline; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 0.97rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { background: #f3f6fb; }
+
+    .case-header {
+      margin-bottom: 12px;
+    }
+
+    .case-summary {
+      background: #fafcff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 26px 20px 40px;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <h1>Respiratory System Interactive Workbook</h1>
+      <p>This student aid combines learning outcomes, explanatory notes, activities, case studies, and detailed teaching answers. Each learning outcome has its own answer tab, each activity has a full memo answer, and each case study is broken into EMS, MITS, and Nursing tabs with discipline-specific guidance.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#anatomy">Start Workbook</a>
+        <a class="btn btn-secondary" href="#cases">Go to Case Studies</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="topbar">
+    <div class="wrap nav">
+      <a href="#overview">Overview</a>
+      <a href="#anatomy">Part 1: Anatomy</a>
+      <a href="#physiology">Part 2: Physiology</a>
+      <a href="#regulation">Part 3: Regulation</a>
+      <a href="#cases">Case Studies</a>
+      <a href="#videos">Videos</a>
+    </div>
+  </div>
+
+  <main>
+    <div class="wrap">
+      <section id="overview" class="section">
+        <div class="card">
+          <h2 class="section-title">How to Use This Workbook</h2>
+          <p>This workbook is designed as a self-study and teaching support resource. Each part begins with the learning outcomes, followed by explanatory notes and activities. Under each learning outcome, click the relevant tab to read the full teaching answer. Under each activity, click the answer tab to open the memo. In the case study section, each discipline has its own answer tab so that EMS, MITS, and Nursing students can focus on their own role while still seeing the full clinical flow.</p>
+          <div class="pill-row">
+            <span class="pill">Learning outcome tabs</span>
+            <span class="pill">Activity memo tabs</span>
+            <span class="pill">EMS / MITS / Nursing tabs</span>
+            <span class="pill">Video support</span>
+            <span class="pill">Radiograph links</span>
+          </div>
+          <div class="note">Teaching tip: Students should first try to answer the question themselves, then open the tab answer to compare their reasoning with the full explanation.</div>
+        </div>
+      </section>
+
+      <section id="anatomy" class="section">
+        <div class="card">
+          <h2 class="section-title">Part 1: Anatomy of the Respiratory System</h2>
+          <p class="subtle">Focus: structure, organisation, and the relationship between anatomy and gas exchange.</p>
+        </div>
+
+        <div class="card">
+          <h3>Learning Outcomes</h3>
+          <ul>
+            <li>Identify structures of the upper and lower respiratory tract.</li>
+            <li>Describe the organisation of the respiratory system, including conducting and respiratory zones.</li>
+            <li>Explain the structure of alveoli and the respiratory membrane.</li>
+            <li>Classify respiratory structures according to function.</li>
+            <li>Differentiate between the right and left lungs in structure and function.</li>
+            <li>Relate alveolar structure to efficient gas exchange.</li>
+          </ul>
+
+          <div class="outcome-tabs" data-tab-group>
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="a-lo1">LO 1</button>
+              <button class="tab-btn" data-tab="a-lo2">LO 2</button>
+              <button class="tab-btn" data-tab="a-lo3">LO 3</button>
+              <button class="tab-btn" data-tab="a-lo4">LO 4</button>
+              <button class="tab-btn" data-tab="a-lo5">LO 5</button>
+              <button class="tab-btn" data-tab="a-lo6">LO 6</button>
+            </div>
+            <div id="a-lo1" class="tab-panel active">
+              <h4>Learning Outcome 1 Answer</h4>
+              <p>The respiratory system can be divided into an upper and a lower respiratory tract. The upper respiratory tract includes the nose, nasal cavity, paranasal sinuses, and pharynx. These structures mainly prepare the air by filtering, warming, and humidifying it before it travels deeper into the body. The lower respiratory tract includes the larynx, trachea, bronchi, bronchioles, and lungs. These structures conduct air toward the gas exchange surfaces of the lungs, and the alveoli within the lungs are the main site where oxygen and carbon dioxide are exchanged.</p>
+              <div class="video-callout">Helpful video: <a href="https://www.youtube.com/watch?v=8NUxv9b4bJk" target="_blank" rel="noopener">Respiratory anatomy overview</a></div>
+            </div>
+            <div id="a-lo2" class="tab-panel">
+              <h4>Learning Outcome 2 Answer</h4>
+              <p>The respiratory system is organised into a conducting zone and a respiratory zone. The conducting zone extends from the nose to the terminal bronchioles and is responsible for moving air and conditioning it. No gas exchange occurs here. The respiratory zone includes the respiratory bronchioles, alveolar ducts, and alveoli. This is the part of the system where oxygen diffuses into the blood and carbon dioxide diffuses out. This organisation is clinically important because some diseases mainly affect airflow, while others mainly affect diffusion and gas exchange.</p>
+              <div class="video-callout">Helpful video: <a href="https://www.youtube.com/watch?v=4vE4x0sQw5c" target="_blank" rel="noopener">Conducting and respiratory zones</a></div>
+            </div>
+            <div id="a-lo3" class="tab-panel">
+              <h4>Learning Outcome 3 Answer</h4>
+              <p>Alveoli are microscopic air sacs with extremely thin walls. They are lined mainly by simple squamous epithelial cells, which reduce the distance for diffusion. Each alveolus is closely surrounded by capillaries, bringing blood very close to the inspired air. The respiratory membrane is made up of the alveolar epithelium, the capillary endothelium, and the fused membranes between them. This arrangement allows oxygen to pass rapidly into the blood and carbon dioxide to leave the blood efficiently.</p>
+              <div class="video-callout">Helpful video: <a href="https://www.youtube.com/watch?v=G1Vh6F6c1E8" target="_blank" rel="noopener">Alveoli and gas exchange</a></div>
+            </div>
+            <div id="a-lo4" class="tab-panel">
+              <h4>Learning Outcome 4 Answer</h4>
+              <p>Respiratory structures can be classified according to whether they mainly conduct air or mainly participate in gas exchange. The nose, pharynx, larynx, trachea, bronchi, and most bronchioles are air-conducting structures. Their job is to move air into the lungs and condition it. In contrast, the respiratory bronchioles, alveolar ducts, and alveoli are gas exchange structures. These are the parts where oxygen enters the bloodstream and carbon dioxide is removed.</p>
+            </div>
+            <div id="a-lo5" class="tab-panel">
+              <h4>Learning Outcome 5 Answer</h4>
+              <p>The right and left lungs are not identical. The right lung has three lobes and is generally wider and slightly shorter, partly because of the position of the liver. The left lung has two lobes and includes the cardiac notch, which provides space for the heart. These differences are important when interpreting radiographs and when describing the location of disease.</p>
+              <div class="link-callout">Radiograph resource: <a href="https://www.ebmconsult.com/app/article/images/100028" target="_blank" rel="noopener">Normal chest radiograph anatomy</a></div>
+            </div>
+            <div id="a-lo6" class="tab-panel">
+              <h4>Learning Outcome 6 Answer</h4>
+              <p>Alveoli are ideal for gas exchange because they have three major structural advantages. First, they have very thin walls, which reduce diffusion distance. Second, they provide a very large total surface area, allowing a large amount of gas exchange to occur at once. Third, they are surrounded by a dense capillary network, which keeps blood flowing past them and maintains the gradients needed for diffusion. In simple terms, the alveoli are built to make gas exchange fast and efficient.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card grid-2">
+          <div class="mini-card">
+            <h3>Core Explanation</h3>
+            <p>The respiratory system is divided into an upper and a lower respiratory tract. The upper respiratory tract includes the nose, nasal cavity, paranasal sinuses, and pharynx. These structures prepare the air before it reaches the lungs by warming it, filtering it, and humidifying it.</p>
+            <p>The lower respiratory tract includes the larynx, trachea, bronchi, bronchioles, and lungs. These structures mainly conduct air into the lungs and, at the level of the alveoli, allow gas exchange to occur.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Conducting vs Respiratory Zones</h3>
+            <p>The conducting zone extends from the nose to the terminal bronchioles. Its function is to move and prepare air, but no gas exchange takes place here.</p>
+            <p>The respiratory zone includes the respiratory bronchioles, alveolar ducts, and alveoli. This is the part of the system where oxygen moves into the blood and carbon dioxide moves out of the blood.</p>
+          </div>
+        </div>
+
+        <div class="card activity">
+          <h3>Activity 1: Structure and Function</h3>
+          <p><strong>Question 1:</strong> Name the structures that form the upper respiratory tract and the lower respiratory tract.</p>
+          <p><strong>Question 2:</strong> Explain the difference between the conducting zone and the respiratory zone.</p>
+          <p><strong>Question 3:</strong> Give three reasons why alveoli are well suited for gas exchange.</p>
+
+          <div class="activity-tabs" data-tab-group>
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="a-act-q1">Answer 1</button>
+              <button class="tab-btn" data-tab="a-act-q2">Answer 2</button>
+              <button class="tab-btn" data-tab="a-act-q3">Answer 3</button>
+            </div>
+            <div id="a-act-q1" class="tab-panel active">
+              <p>The upper respiratory tract includes the nose, nasal cavity, paranasal sinuses, and pharynx. The lower respiratory tract includes the larynx, trachea, bronchi, bronchioles, and lungs. A complete answer should show that the upper tract prepares the air, while the lower tract carries it toward the lungs and supports gas exchange.</p>
+              <div class="video-callout">Helpful video: <a href="https://www.youtube.com/watch?v=8NUxv9b4bJk" target="_blank" rel="noopener">Upper and lower respiratory tract</a></div>
+            </div>
+            <div id="a-act-q2" class="tab-panel">
+              <p>The conducting zone moves air from the outside environment toward the lungs and prepares it by filtering, warming, and humidifying it. No gas exchange takes place there. The respiratory zone is where gas exchange occurs, because oxygen moves into the blood and carbon dioxide moves out. This answer is important because it helps students distinguish between airflow problems and diffusion problems.</p>
+            </div>
+            <div id="a-act-q3" class="tab-panel">
+              <p>Alveoli are well suited for gas exchange because they have thin walls, a large surface area, and an extensive capillary supply. These features allow rapid diffusion of gases. Students should explain not only what these features are, but also why they matter for oxygen and carbon dioxide exchange.</p>
+              <div class="video-callout">Helpful video: <a href="https://www.youtube.com/watch?v=G1Vh6F6c1E8" target="_blank" rel="noopener">Alveoli gas exchange simple explanation</a></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="physiology" class="section">
+        <div class="card">
+          <h2 class="section-title">Part 2: Physiology of Breathing and Gas Exchange</h2>
+          <p class="subtle">Focus: ventilation, lung volumes, gas transport, and interpretation of normal values.</p>
+        </div>
+
+        <div class="card">
+          <h3>Learning Outcomes</h3>
+          <ul>
+            <li>Define key respiratory terms, including tidal volume, vital capacity, and lung capacity.</li>
+            <li>State normal respiratory values, including respiratory rate, oxygen saturation, and arterial blood gases.</li>
+            <li>Explain pulmonary ventilation and distinguish it from external and internal respiration.</li>
+            <li>Differentiate between external respiration, internal respiration, and cellular respiration.</li>
+            <li>Describe the mechanisms of oxygen and carbon dioxide transport in the blood.</li>
+            <li>Interpret normal and abnormal respiratory rates and basic blood gas values.</li>
+            <li>Apply knowledge of lung volumes to clinical scenarios.</li>
+            <li>Differentiate between oxygen transport and carbon dioxide transport.</li>
+            <li>Examine factors affecting gas exchange.</li>
+            <li>Predict the effects of impaired ventilation or gas exchange on oxygenation and carbon dioxide levels.</li>
+          </ul>
+
+          <div class="outcome-tabs" data-tab-group>
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="p-lo1">LO 1</button>
+              <button class="tab-btn" data-tab="p-lo2">LO 2</button>
+              <button class="tab-btn" data-tab="p-lo3">LO 3</button>
+              <button class="tab-btn" data-tab="p-lo4">LO 4</button>
+              <button class="tab-btn" data-tab="p-lo5">LO 5</button>
+              <button class="tab-btn" data-tab="p-lo6">LO 6</button>
+              <button class="tab-btn" data-tab="p-lo7">LO 7</button>
+              <button class="tab-btn" data-tab="p-lo8">LO 8</button>
+              <button class="tab-btn" data-tab="p-lo9">LO 9</button>
+              <button class="tab-btn" data-tab="p-lo10">LO 10</button>
+            </div>
+            <div id="p-lo1" class="tab-panel active"><p>Tidal volume is the amount of air moved in a normal quiet breath, usually around 500 mL in an adult. Vital capacity is the maximum amount of air that can be exhaled after a full inspiration. Total lung capacity is the total amount of air the lungs can hold. These terms help describe lung function in measurable ways.</p></div>
+            <div id="p-lo2" class="tab-panel"><p>Normal respiratory values provide an essential baseline. A normal adult respiratory rate is 12 to 20 breaths per minute. Oxygen saturation is usually 95 to 100%. PaO₂ is about 80 to 100 mmHg, PaCO₂ is 35 to 45 mmHg, and pH is 7.35 to 7.45. These values help identify whether a patient is oxygenating and ventilating adequately.</p></div>
+            <div id="p-lo3" class="tab-panel"><p>Pulmonary ventilation refers to the movement of air into and out of the lungs. External respiration refers to gas exchange between alveoli and blood, while internal respiration refers to gas exchange between blood and tissues. Students should understand that ventilation is movement, while respiration is exchange.</p></div>
+            <div id="p-lo4" class="tab-panel"><p>External respiration occurs in the lungs, internal respiration occurs between blood and tissues, and cellular respiration occurs inside cells where oxygen is used to make ATP. This distinction is important because breathing problems can occur at different levels and not all oxygen problems are caused by poor ventilation.</p></div>
+            <div id="p-lo5" class="tab-panel"><p>Oxygen is transported mainly bound to haemoglobin, forming oxyhaemoglobin. Carbon dioxide is transported mainly as bicarbonate ions, with smaller amounts bound to haemoglobin or dissolved in plasma. This means oxygen transport depends heavily on haemoglobin, while carbon dioxide transport is closely related to acid–base balance.</p><div class="video-callout">Helpful video: <a href="https://www.youtube.com/watch?v=Z0zZ7xc18Cc" target="_blank" rel="noopener">Oxygen and carbon dioxide transport</a></div></div>
+            <div id="p-lo6" class="tab-panel"><p>Normal values suggest stable breathing and gas exchange. Abnormal respiratory rate, oxygen saturation, or blood gas values suggest respiratory compromise. For example, a high respiratory rate can indicate distress, a low PaO₂ suggests poor oxygenation, and a raised PaCO₂ suggests inadequate ventilation.</p></div>
+            <div id="p-lo7" class="tab-panel"><p>Lung volumes can help explain clinical patterns. In shallow breathing, tidal volume decreases, so less fresh air reaches the alveoli. In deep breathing, tidal volume increases, which often improves alveolar ventilation. This makes lung volumes useful when interpreting fatigue, pain, or respiratory distress.</p><div class="video-callout">Helpful video: <a href="https://www.youtube.com/watch?v=Yh3C7d8k9e0" target="_blank" rel="noopener">Lung volumes and spirometry</a></div></div>
+            <div id="p-lo8" class="tab-panel"><p>Oxygen transport mainly depends on haemoglobin binding and delivery to tissues. Carbon dioxide transport mainly depends on the bicarbonate system and contributes strongly to pH control. This difference helps explain why anaemia affects oxygen delivery, while hypoventilation strongly affects carbon dioxide and acid–base status.</p></div>
+            <div id="p-lo9" class="tab-panel"><p>Gas exchange depends on a large surface area, a thin membrane, and good blood flow. If the surface area decreases, as in emphysema, oxygen uptake is reduced. If the membrane becomes thicker, as in pneumonia, diffusion is slower. If blood flow is reduced, as in pulmonary embolism, gas exchange becomes ineffective even if ventilation is present.</p></div>
+            <div id="p-lo10" class="tab-panel"><p>If ventilation is impaired, carbon dioxide is retained and PaCO₂ rises. If gas exchange is impaired, oxygenation falls and PaO₂ drops. Some patients may develop both problems at the same time. Students should be able to predict whether the main problem is oxygen failure, carbon dioxide failure, or both.</p></div>
+          </div>
+        </div>
+
+        <div class="card grid-2">
+          <div class="mini-card">
+            <h3>Ventilation and Respiration</h3>
+            <p>Pulmonary ventilation is the physical movement of air into and out of the lungs. This includes inhalation and exhalation. External respiration refers to gas exchange between the alveoli and the blood. Internal respiration refers to gas exchange between the blood and the tissues. Cellular respiration is different from both of these, because it refers to the use of oxygen by cells to produce energy in the form of ATP.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Lung Volumes and Normal Values</h3>
+            <p>Tidal volume is the amount of air moved during a normal quiet breath and is about 500 mL in adults. Vital capacity is the maximum amount of air exhaled after a deep inhalation. Total lung capacity is the total volume of air the lungs can hold. A normal adult respiratory rate is 12 to 20 breaths per minute, oxygen saturation is generally 95 to 100%, PaO₂ is about 80 to 100 mmHg, PaCO₂ is 35 to 45 mmHg, and pH is 7.35 to 7.45.</p>
+          </div>
+        </div>
+
+        <div class="card activity">
+          <h3>Activity 2: Physiology in Context</h3>
+          <p><strong>Question 1:</strong> Explain the difference between ventilation, external respiration, internal respiration, and cellular respiration.</p>
+          <p><strong>Question 2:</strong> Define tidal volume, vital capacity, and total lung capacity.</p>
+          <p><strong>Question 3:</strong> A patient is breathing rapidly but shallowly. Explain what is happening to tidal volume and why gas exchange may still be poor.</p>
+          <p><strong>Question 4:</strong> State the normal values for respiratory rate, oxygen saturation, PaO₂, PaCO₂, and pH.</p>
+
+          <div class="activity-tabs" data-tab-group>
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="p-act1">Answer 1</button>
+              <button class="tab-btn" data-tab="p-act2">Answer 2</button>
+              <button class="tab-btn" data-tab="p-act3">Answer 3</button>
+              <button class="tab-btn" data-tab="p-act4">Answer 4</button>
+            </div>
+            <div id="p-act1" class="tab-panel active"><p>Ventilation is the movement of air into and out of the lungs. External respiration is the exchange of gases between alveoli and blood. Internal respiration is the exchange of gases between blood and tissues. Cellular respiration is the use of oxygen by cells to produce energy. This answer matters because students often use these terms as if they mean the same thing, but they describe different levels of respiratory function.</p></div>
+            <div id="p-act2" class="tab-panel"><p>Tidal volume is the volume of air moved during a normal breath. Vital capacity is the maximum amount of air exhaled after the deepest possible inhalation. Total lung capacity is the full amount of air the lungs can hold after maximum inspiration. These values are useful for understanding normal lung function and disease patterns.</p></div>
+            <div id="p-act3" class="tab-panel"><p>In shallow breathing, tidal volume becomes smaller. Even if the patient breathes more quickly, less fresh air reaches the alveoli with each breath. This means alveolar ventilation can still be poor, and gas exchange may remain inadequate. In simple terms, the patient is breathing fast but not effectively.</p><div class="video-callout">Helpful video: <a href="https://www.youtube.com/watch?v=Yh3C7d8k9e0" target="_blank" rel="noopener">Shallow breathing and tidal volume</a></div></div>
+            <div id="p-act4" class="tab-panel"><p>The normal respiratory rate is 12 to 20 breaths per minute. Oxygen saturation is generally 95 to 100%. PaO₂ is 80 to 100 mmHg. PaCO₂ is 35 to 45 mmHg. Normal pH is 7.35 to 7.45. These numbers help clinicians decide whether oxygenation, ventilation, and acid–base balance are normal.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="regulation" class="section">
+        <div class="card">
+          <h2 class="section-title">Part 3: Regulation of Breathing</h2>
+          <p class="subtle">Focus: respiratory centres, chemoreceptors, acid–base balance, and clinical signs of distress.</p>
+        </div>
+
+        <div class="card">
+          <h3>Learning Outcomes</h3>
+          <ul>
+            <li>Identify respiratory centres in the medulla oblongata and pons.</li>
+            <li>Identify central and peripheral chemoreceptors and their locations.</li>
+            <li>Explain the role of chemoreceptors in regulating breathing in response to CO₂, O₂, and pH changes.</li>
+            <li>Describe normal and abnormal breathing patterns.</li>
+            <li>Apply knowledge of chemoreceptor responses to explain hypercapnia and hypoxia.</li>
+            <li>Interpret clinical signs such as cyanosis, altered breathing rate, and oxygen saturation.</li>
+            <li>Analyse the relationship between CO₂ levels, pH, and respiratory compensation.</li>
+            <li>Evaluate respiratory conditions using physiological principles.</li>
+            <li>Justify appropriate interventions based on patient presentation.</li>
+          </ul>
+
+          <div class="outcome-tabs" data-tab-group>
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="r-lo1">LO 1</button>
+              <button class="tab-btn" data-tab="r-lo2">LO 2</button>
+              <button class="tab-btn" data-tab="r-lo3">LO 3</button>
+              <button class="tab-btn" data-tab="r-lo4">LO 4</button>
+              <button class="tab-btn" data-tab="r-lo5">LO 5</button>
+              <button class="tab-btn" data-tab="r-lo6">LO 6</button>
+              <button class="tab-btn" data-tab="r-lo7">LO 7</button>
+              <button class="tab-btn" data-tab="r-lo8">LO 8</button>
+              <button class="tab-btn" data-tab="r-lo9">LO 9</button>
+            </div>
+            <div id="r-lo1" class="tab-panel active"><p>The respiratory centres are located in the medulla oblongata and the pons. The medulla generates the basic rhythm of breathing, while the pons helps smooth and adjust that rhythm. Together, they control automatic breathing without conscious effort.</p></div>
+            <div id="r-lo2" class="tab-panel"><p>Central chemoreceptors are located in the medulla and respond mainly to carbon dioxide and pH changes. Peripheral chemoreceptors are found in the carotid and aortic bodies and respond mainly to low oxygen levels. Knowing their locations helps explain different breathing responses in health and disease.</p></div>
+            <div id="r-lo3" class="tab-panel"><p>Chemoreceptors help regulate breathing by constantly monitoring blood chemistry. When carbon dioxide rises or pH falls, the respiratory centres are stimulated to increase breathing. When oxygen levels fall significantly, peripheral chemoreceptors help increase respiratory drive. This is one of the body’s key homeostatic mechanisms.</p><div class="video-callout">Helpful video: <a href="https://www.youtube.com/watch?v=7yP7g6l8z6M" target="_blank" rel="noopener">Chemoreceptors and breathing regulation</a></div></div>
+            <div id="r-lo4" class="tab-panel"><p>Normal breathing is called eupnoea. Tachypnoea is rapid breathing, bradypnoea is slow breathing, and apnoea is absent breathing. Hyperventilation refers to excessive breathing that lowers carbon dioxide, while Kussmaul breathing is a deep pattern seen in severe acidosis. These patterns often provide important clinical clues.</p></div>
+            <div id="r-lo5" class="tab-panel"><p>Hypercapnia means carbon dioxide is elevated, and it strongly stimulates breathing because it lowers pH. Hypoxia means oxygen levels are low, and it stimulates peripheral chemoreceptors. Students should understand that carbon dioxide is usually the main driver of breathing in healthy people, while oxygen becomes particularly important in severe disease or chronic hypercapnic states.</p></div>
+            <div id="r-lo6" class="tab-panel"><p>Cyanosis suggests low oxygenation. An altered respiratory rate may suggest distress, fatigue, or compensation. Low oxygen saturation confirms that oxygenation is reduced. Clinical signs should always be interpreted together, not in isolation, because one sign alone may not show the whole picture.</p></div>
+            <div id="r-lo7" class="tab-panel"><p>Carbon dioxide and pH are closely linked. When carbon dioxide rises, more acid is formed and pH falls, causing respiratory acidosis. When carbon dioxide falls, acidity decreases and pH rises, causing respiratory alkalosis. This is why ventilation has such a strong effect on acid–base balance.</p><div class="video-callout">Helpful video: <a href="https://www.youtube.com/watch?v=5Y1L5yK0b6A" target="_blank" rel="noopener">Respiratory acidosis and alkalosis</a></div></div>
+            <div id="r-lo8" class="tab-panel"><p>Respiratory conditions can be evaluated by identifying the main physiological problem. Asthma is mainly an airflow problem, pneumonia is mainly a gas exchange problem, COPD includes airflow limitation and carbon dioxide retention, and pulmonary embolism is mainly a perfusion problem. This approach helps students integrate anatomy, physiology, and clinical reasoning.</p></div>
+            <div id="r-lo9" class="tab-panel"><p>Appropriate interventions depend on the physiological problem. Oxygen is given to correct hypoxia, ventilation support is used to improve carbon dioxide removal, and upright positioning helps improve lung expansion. A strong answer should justify the intervention based on what is going wrong in the patient’s respiratory system.</p></div>
+          </div>
+        </div>
+
+        <div class="card activity">
+          <h3>Activity 3: Regulation and Interpretation</h3>
+          <p><strong>Question 1:</strong> Identify the respiratory centres and explain their role.</p>
+          <p><strong>Question 2:</strong> Explain the difference between central and peripheral chemoreceptors.</p>
+          <p><strong>Question 3:</strong> Why does increased carbon dioxide cause an increase in breathing rate?</p>
+          <p><strong>Question 4:</strong> Explain why respiratory acidosis develops when ventilation is inadequate.</p>
+
+          <div class="activity-tabs" data-tab-group>
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="r-act1">Answer 1</button>
+              <button class="tab-btn" data-tab="r-act2">Answer 2</button>
+              <button class="tab-btn" data-tab="r-act3">Answer 3</button>
+              <button class="tab-btn" data-tab="r-act4">Answer 4</button>
+            </div>
+            <div id="r-act1" class="tab-panel active"><p>The respiratory centres are found in the medulla oblongata and pons. The medulla sets the basic breathing rhythm, while the pons refines and modifies that rhythm. Together they ensure that breathing continues automatically and can adapt to the body’s needs.</p></div>
+            <div id="r-act2" class="tab-panel"><p>Central chemoreceptors are located in the medulla and respond mainly to carbon dioxide and pH. Peripheral chemoreceptors are located in the carotid and aortic bodies and respond mainly to low oxygen levels. A complete answer should mention both the location and the main stimulus.</p></div>
+            <div id="r-act3" class="tab-panel"><p>When carbon dioxide levels increase, the blood becomes more acidic. Chemoreceptors detect this change and stimulate the respiratory centres to increase the rate and depth of breathing. This helps remove excess carbon dioxide and restore acid–base balance. In simple terms, high CO₂ tells the body it needs to breathe more.</p><div class="video-callout">Helpful video: <a href="https://www.youtube.com/watch?v=7yP7g6l8z6M" target="_blank" rel="noopener">Why high CO₂ increases breathing</a></div></div>
+            <div id="r-act4" class="tab-panel"><p>Respiratory acidosis develops when ventilation is inadequate because carbon dioxide is not removed effectively. Carbon dioxide then accumulates in the blood and contributes to acid formation, which lowers pH. This is why hypoventilation is strongly associated with respiratory acidosis.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cases" class="section">
+        <div class="card">
+          <h2 class="section-title">Integrated Case Study Series</h2>
+          <p class="subtle">Each case follows the clinical flow of EMS first response, MITS diagnostic confirmation, and Nursing care or aftercare.</p>
+        </div>
+
+        <div class="card">
+          <div class="case-header">
+            <h3>Case 1: Asthma Exacerbation</h3>
+            <div class="case-summary"><strong>Scenario:</strong> A 22-year-old patient presents with wheezing, shortness of breath, a respiratory rate of 32 breaths per minute, and an oxygen saturation of 88%.</div>
+          </div>
+          <div class="case-tabs" data-tab-group>
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="case1-ems">EMS</button>
+              <button class="tab-btn" data-tab="case1-mits">MITS</button>
+              <button class="tab-btn" data-tab="case1-nursing">Nursing</button>
+            </div>
+            <div id="case1-ems" class="tab-panel active">
+              <h4>EMS Answer</h4>
+              <p>The first responder should identify wheezing, rapid breathing, low oxygen saturation, and increased work of breathing as signs of respiratory distress. Asthma is mainly a ventilation problem caused by bronchoconstriction, airway inflammation, and mucus production. Immediate first aid includes oxygen and bronchodilator support if available. Oxygen is indicated because the low oxygen saturation shows that the patient is not oxygenating adequately.</p>
+            </div>
+            <div id="case1-mits" class="tab-panel">
+              <h4>MITS Answer</h4>
+              <p>Imaging may include a chest X-ray, although it is often normal in asthma because the main problem is functional airway narrowing rather than structural lung destruction. Sometimes hyperinflation may be seen. Other investigations may include peak expiratory flow or spirometry if the patient is stable enough to perform them.</p>
+              <div class="link-callout">Radiograph example: <a href="https://radiopaedia.org/articles/asthma?lang=gb" target="_blank" rel="noopener">Asthma imaging overview</a></div>
+            </div>
+            <div id="case1-nursing" class="tab-panel">
+              <h4>Nursing Answer</h4>
+              <p>Nursing care includes monitoring respiratory rate, oxygen saturation, effort of breathing, and response to treatment. The patient should be positioned upright to improve lung expansion. Medication administration, reassurance, and observing for worsening fatigue are also important because an apparently fast-breathing patient can deteriorate if the respiratory muscles tire.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="case-header">
+            <h3>Case 2: Pneumonia</h3>
+            <div class="case-summary"><strong>Scenario:</strong> A 65-year-old patient presents with fever, productive cough, and an oxygen saturation of 90%.</div>
+          </div>
+          <div class="case-tabs" data-tab-group>
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="case2-ems">EMS</button>
+              <button class="tab-btn" data-tab="case2-mits">MITS</button>
+              <button class="tab-btn" data-tab="case2-nursing">Nursing</button>
+            </div>
+            <div id="case2-ems" class="tab-panel active">
+              <h4>EMS Answer</h4>
+              <p>EMS should identify fever, low oxygen saturation, shortness of breath, and possible chest discomfort or productive cough as signs of respiratory compromise. Immediate care includes oxygen, monitoring vital signs, and arranging prompt transfer. The major physiological problem is impaired gas exchange, because infected alveoli are filling with inflammatory material.</p>
+            </div>
+            <div id="case2-mits" class="tab-panel">
+              <h4>MITS Answer</h4>
+              <p>The main investigation is chest radiography. A chest X-ray may show consolidation, which appears as a more opaque region in the lung where air should normally be present. This helps confirm that the alveoli are filled with fluid or inflammatory material and supports the clinical diagnosis of pneumonia.</p>
+              <div class="link-callout">Radiograph example: <a href="https://radiopaedia.org/articles/pneumonia?lang=gb" target="_blank" rel="noopener">Pneumonia radiograph examples</a></div>
+            </div>
+            <div id="case2-nursing" class="tab-panel">
+              <h4>Nursing Answer</h4>
+              <p>Nursing care focuses on oxygenation, positioning, medication support, and monitoring. Because gas exchange is impaired, the patient may need oxygen therapy and upright positioning to improve ventilation. Antibiotics, temperature monitoring, sputum observation, and encouraging deep breathing where appropriate are important parts of recovery and aftercare.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="case-header">
+            <h3>Case 3: COPD Exacerbation</h3>
+            <div class="case-summary"><strong>Scenario:</strong> A 70-year-old smoker presents with chronic shortness of breath, fatigue, and evidence of carbon dioxide retention.</div>
+          </div>
+          <div class="case-tabs" data-tab-group>
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="case3-ems">EMS</button>
+              <button class="tab-btn" data-tab="case3-mits">MITS</button>
+              <button class="tab-btn" data-tab="case3-nursing">Nursing</button>
+            </div>
+            <div id="case3-ems" class="tab-panel active">
+              <h4>EMS Answer</h4>
+              <p>EMS should recognise chronic dyspnoea, increased effort of breathing, and carbon dioxide retention as significant warning signs. Oxygen should often be given in a controlled way, because some COPD patients rely more on low oxygen levels as part of their respiratory drive. The immediate priority is to improve breathing while avoiding worsening hypercapnia.</p>
+            </div>
+            <div id="case3-mits" class="tab-panel">
+              <h4>MITS Answer</h4>
+              <p>MITS may support diagnosis with chest X-ray findings such as hyperinflation. Spirometry and arterial blood gases are also important and may show airflow limitation and raised carbon dioxide levels. Imaging helps show structural change, while blood gases help show the functional consequences.</p>
+              <div class="link-callout">Radiograph example: <a href="https://radiopaedia.org/articles/copd?lang=gb" target="_blank" rel="noopener">COPD radiograph examples</a></div>
+            </div>
+            <div id="case3-nursing" class="tab-panel">
+              <h4>Nursing Answer</h4>
+              <p>Nursing care includes monitoring oxygen saturation, respiratory rate, effort of breathing, blood gases, and response to treatment. Breathing techniques, medication support, and energy conservation teaching may be helpful. Because COPD is chronic, aftercare often includes education on inhaler use, smoking cessation, and recognition of worsening symptoms.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="case-header">
+            <h3>Case 4: Pulmonary Embolism</h3>
+            <div class="case-summary"><strong>Scenario:</strong> A patient presents with sudden shortness of breath, sharp chest pain, tachycardia, and reduced oxygen saturation.</div>
+          </div>
+          <div class="case-tabs" data-tab-group>
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="case4-ems">EMS</button>
+              <button class="tab-btn" data-tab="case4-mits">MITS</button>
+              <button class="tab-btn" data-tab="case4-nursing">Nursing</button>
+            </div>
+            <div id="case4-ems" class="tab-panel active">
+              <h4>EMS Answer</h4>
+              <p>This is an emergency because pulmonary embolism can rapidly reduce perfusion to part of the lungs and severely impair oxygen delivery. EMS should provide oxygen, recognise the seriousness of sudden dyspnoea with chest pain, and ensure urgent transfer. The main physiological problem is perfusion failure, not simply ventilation failure.</p>
+            </div>
+            <div id="case4-mits" class="tab-panel">
+              <h4>MITS Answer</h4>
+              <p>CT pulmonary angiography is a key imaging investigation because it can demonstrate the clot in the pulmonary vessels. A chest X-ray may be normal or only show non-specific changes, because the alveoli may still be ventilated even though blood flow is blocked. This illustrates why a normal CXR does not exclude pulmonary embolism.</p>
+              <div class="link-callout">Radiology resource: <a href="https://radiopaedia.org/articles/pulmonary-embolism?lang=gb" target="_blank" rel="noopener">Pulmonary embolism imaging examples</a></div>
+            </div>
+            <div id="case4-nursing" class="tab-panel">
+              <h4>Nursing Answer</h4>
+              <p>Nursing care includes monitoring oxygenation, pulse, blood pressure, pain, and signs of deterioration. Anticoagulant therapy is often required, and the patient must be observed for complications such as worsening respiratory compromise or haemodynamic instability. Nursing also supports patient education about clot prevention and ongoing treatment.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="case-header">
+            <h3>Case 5: Pleural Effusion</h3>
+            <div class="case-summary"><strong>Scenario:</strong> A patient presents with shortness of breath, reduced chest expansion on one side, dull percussion, and decreased breath sounds.</div>
+          </div>
+          <div class="case-tabs" data-tab-group>
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="case5-ems">EMS</button>
+              <button class="tab-btn" data-tab="case5-mits">MITS</button>
+              <button class="tab-btn" data-tab="case5-nursing">Nursing</button>
+            </div>
+            <div id="case5-ems" class="tab-panel active">
+              <h4>EMS Answer</h4>
+              <p>EMS should identify reduced chest expansion, shortness of breath, dull percussion, and decreased breath sounds as clues that fluid may be present around the lung. Oxygen and upright positioning are useful first measures because they can help improve breathing comfort while the patient is transferred for further assessment.</p>
+            </div>
+            <div id="case5-mits" class="tab-panel">
+              <h4>MITS Answer</h4>
+              <p>Chest radiography and ultrasound are both important. A chest X-ray may show blunting of the costophrenic angle or a visible fluid level. Ultrasound is especially helpful because it confirms the presence of pleural fluid and can help guide drainage procedures.</p>
+              <div class="link-callout">Radiograph example: <a href="https://radiopaedia.org/articles/pleural-effusion?lang=gb" target="_blank" rel="noopener">Pleural effusion imaging examples</a></div>
+            </div>
+            <div id="case5-nursing" class="tab-panel">
+              <h4>Nursing Answer</h4>
+              <p>Nursing care includes monitoring respiratory effort, oxygen saturation, chest pain or discomfort, and supporting preparation for drainage if needed. Aftercare may include observing the patient following thoracentesis, monitoring for recurrence, and helping manage the underlying cause of the fluid build-up.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="case-header">
+            <h3>Case 6: Respiratory Acidosis</h3>
+            <div class="case-summary"><strong>Scenario:</strong> A patient presents with a reduced respiratory rate, raised carbon dioxide level, and low blood pH.</div>
+          </div>
+          <div class="case-tabs" data-tab-group>
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="case6-ems">EMS</button>
+              <button class="tab-btn" data-tab="case6-mits">MITS</button>
+              <button class="tab-btn" data-tab="case6-nursing">Nursing</button>
+            </div>
+            <div id="case6-ems" class="tab-panel active">
+              <h4>EMS Answer</h4>
+              <p>EMS should see reduced respiratory rate, possible drowsiness, and signs of poor ventilation as urgent concerns. The immediate problem is inadequate ventilation, which allows carbon dioxide to accumulate. Airway support and assisted ventilation may be needed to prevent further deterioration.</p>
+            </div>
+            <div id="case6-mits" class="tab-panel">
+              <h4>MITS Answer</h4>
+              <p>Arterial blood gas analysis is the main investigation because it directly confirms raised carbon dioxide and low pH. Imaging is not always the first priority unless a structural cause is suspected. In some cases, chest radiography or other imaging may be requested to look for the underlying reason for hypoventilation.</p>
+              <div class="link-callout">Radiology reference: <a href="https://radiopaedia.org/articles/respiratory-failure?lang=gb" target="_blank" rel="noopener">Respiratory failure imaging overview</a></div>
+            </div>
+            <div id="case6-nursing" class="tab-panel">
+              <h4>Nursing Answer</h4>
+              <p>Nursing care includes close monitoring of respiratory rate, effort of breathing, oxygen saturation, blood gases, and level of consciousness. The main goal of treatment is to improve ventilation so that carbon dioxide can be removed. Nursing support also includes helping treat the underlying cause and watching for further acid–base deterioration.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="videos" class="section">
+        <div class="card">
+          <h2 class="section-title">Useful Videos and Resources</h2>
+          <p class="subtle">These links support the workbook and can be used when students need another explanation in a different voice or format.</p>
+          <div class="resource-list">
+            <table>
+              <thead>
+                <tr>
+                  <th>Topic</th>
+                  <th>Resource</th>
+                  <th>Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Respiratory anatomy overview</td>
+                  <td>YouTube search</td>
+                  <td><a href="https://www.youtube.com/watch?v=8NUxv9b4bJk" target="_blank" rel="noopener">Ninja Nerd Respiratory System</a></td>
+                </tr>
+                <tr>
+                  <td>Alveoli and gas exchange</td>
+                  <td>YouTube search</td>
+                  <td><a href="https://www.youtube.com/watch?v=G1Vh6F6c1E8" target="_blank" rel="noopener">Alveoli and gas exchange</a></td>
+                </tr>
+                <tr>
+                  <td>Oxygen transport</td>
+                  <td>YouTube search</td>
+                  <td><a href="https://www.youtube.com/watch?v=Z0zZ7xc18Cc" target="_blank" rel="noopener">Oxygen transport and haemoglobin</a></td>
+                </tr>
+                <tr>
+                  <td>Chemoreceptors</td>
+                  <td>YouTube search</td>
+                  <td><a href="https://www.youtube.com/watch?v=7yP7g6l8z6M" target="_blank" rel="noopener">Chemoreceptors and regulation</a></td>
+                </tr>
+                <tr>
+                  <td>Lung sounds</td>
+                  <td>YouTube</td>
+                  <td><a href="https://youtu.be/l0G7iXaIfOg" target="_blank" rel="noopener">Lung sounds video</a></td>
+                </tr>
+                <tr>
+                  <td>Normal chest X-ray anatomy</td>
+                  <td>Reference image</td>
+                  <td><a href="https://www.ebmconsult.com/app/article/images/100028" target="_blank" rel="noopener">Normal CXR</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    Respiratory System Interactive Workbook • Static HTML structure ready for testing and GitHub Pages deployment.
+  </footer>
+
+  <script>
+    document.querySelectorAll('[data-tab-group]').forEach(group => {
+      const buttons = group.querySelectorAll('.tab-btn');
+      const panels = group.querySelectorAll('.tab-panel');
+
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          const target = button.getAttribute('data-tab');
+          buttons.forEach(btn => btn.classList.remove('active'));
+          panels.forEach(panel => panel.classList.remove('active'));
+          button.classList.add('active');
+          const activePanel = group.querySelector('#' + target);
+          if (activePanel) activePanel.classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
