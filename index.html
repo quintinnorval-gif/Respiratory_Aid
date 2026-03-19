@@ -21,6 +21,21 @@
       --good-bg: #dcfce7;
       --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
       --radius: 18px;
+
+      --anatomy: #0284c7;
+      --anatomy-soft: #e0f2fe;
+      --physiology: #16a34a;
+      --physiology-soft: #dcfce7;
+      --regulation: #dc2626;
+      --regulation-soft: #fee2e2;
+      --cases: #7c3aed;
+      --cases-soft: #ede9fe;
+      --glossary: #d97706;
+      --glossary-soft: #fef3c7;
+      --videos: #db2777;
+      --videos-soft: #fce7f3;
+      --overview: #0f766e;
+      --overview-soft: #ccfbf1;
     }
 
     * { box-sizing: border-box; }
@@ -182,6 +197,152 @@
       background: #f8fbff;
     }
 
+    .section-header-card {
+      color: white;
+      border: none;
+    }
+
+    .section-header-card .subtle {
+      color: rgba(255,255,255,0.92);
+    }
+
+    .overview-theme {
+      background: linear-gradient(135deg, var(--overview) 0%, #14b8a6 100%);
+      border-left: 8px solid #115e59;
+    }
+
+    .overview-theme .pill {
+      background: rgba(255,255,255,0.18);
+      color: white;
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .overview-theme .note {
+      background: rgba(255,255,255,0.16);
+      color: white;
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .anatomy-theme {
+      background: linear-gradient(135deg, var(--anatomy) 0%, #38bdf8 100%);
+      border-left: 8px solid #075985;
+    }
+
+    .physiology-theme {
+      background: linear-gradient(135deg, var(--physiology) 0%, #4ade80 100%);
+      border-left: 8px solid #166534;
+    }
+
+    .regulation-theme {
+      background: linear-gradient(135deg, var(--regulation) 0%, #f87171 100%);
+      border-left: 8px solid #991b1b;
+    }
+
+    .cases-theme {
+      background: linear-gradient(135deg, var(--cases) 0%, #a78bfa 100%);
+      border-left: 8px solid #5b21b6;
+    }
+
+    .glossary-theme {
+      background: linear-gradient(135deg, var(--glossary) 0%, #fbbf24 100%);
+      border-left: 8px solid #92400e;
+    }
+
+    .videos-theme {
+      background: linear-gradient(135deg, #be185d 0%, #ec4899 100%);
+      border-left: 8px solid #831843;
+    }
+
+    .videos-theme .subtle {
+      color: rgba(255,255,255,0.95);
+    }
+
+    .anatomy-card {
+      background: var(--anatomy-soft);
+      border-left: 8px solid var(--anatomy);
+    }
+
+    .physiology-card {
+      background: var(--physiology-soft);
+      border-left: 8px solid var(--physiology);
+    }
+
+    .regulation-card {
+      background: var(--regulation-soft);
+      border-left: 8px solid var(--regulation);
+    }
+
+    .cases-card {
+      background: var(--cases-soft);
+      border-left: 8px solid var(--cases);
+    }
+
+    .glossary-card {
+      background: var(--glossary-soft);
+      border-left: 8px solid var(--glossary);
+    }
+
+    .videos-card {
+      background: #ffe4ef;
+      border: 1px solid #f9a8d4;
+      border-left: 8px solid var(--videos);
+      border-radius: 16px;
+      padding: 16px;
+      color: #831843;
+    }
+
+    .anatomy-card .mini-card,
+    .physiology-card .mini-card,
+    .regulation-card .mini-card,
+    .cases-card .mini-card,
+    .glossary-card .mini-card,
+    .videos-card .mini-card {
+      background: rgba(255,255,255,0.85);
+    }
+
+    .anatomy-card .tab-buttons { background: #d8effc; }
+    .physiology-card .tab-buttons { background: #d8f8e1; }
+    .regulation-card .tab-buttons { background: #fde2e2; }
+    .cases-card .tab-buttons { background: #ede5ff; }
+    .glossary-card .tab-buttons { background: #fff2cf; }
+    .videos-card .tab-buttons { background: #fde0ee; }
+
+    .anatomy-card .tab-btn.active {
+      background: var(--anatomy);
+      border-color: var(--anatomy);
+      color: white;
+    }
+
+    .physiology-card .tab-btn.active {
+      background: var(--physiology);
+      border-color: var(--physiology);
+      color: white;
+    }
+
+    .regulation-card .tab-btn.active {
+      background: var(--regulation);
+      border-color: var(--regulation);
+      color: white;
+    }
+
+    .cases-card .tab-btn.active {
+      background: var(--cases);
+      border-color: var(--cases);
+      color: white;
+    }
+
+    .glossary-card .tab-btn.active {
+      background: var(--glossary);
+      border-color: var(--glossary);
+      color: white;
+    }
+
+    .videos-card .tab-btn.active {
+      background: var(--videos);
+      border-color: var(--videos);
+      color: white;
+    }
+
     .note {
       background: var(--warn-bg);
       color: var(--warn);
@@ -272,6 +433,16 @@
 
     th { background: #f3f6fb; }
 
+    /* Strong Glossary section header colors */
+    .glossary-anatomy th { background: #0284c7; color: white; }
+    .glossary-physiology th { background: #16a34a; color: white; }
+    .glossary-respiration th { background: #d97706; color: white; }
+    .glossary-transport th { background: #7c3aed; color: white; }
+    .glossary-regulation th { background: #dc2626; color: white; }
+    .glossary-clinical th { background: #db2777; color: white; }
+    .glossary-exam th { background: #059669; color: white; }
+    .glossary-values th { background: #1d4ed8; color: white; }
+
     .case-header {
       margin-bottom: 12px;
     }
@@ -315,6 +486,7 @@
       <a href="#physiology">Part 2: Physiology</a>
       <a href="#regulation">Part 3: Regulation</a>
       <a href="#cases">Case Studies</a>
+      <a href="#glossary">Glossary</a>
       <a href="#videos">Videos</a>
     </div>
   </div>
@@ -322,7 +494,7 @@
   <main>
     <div class="wrap">
       <section id="overview" class="section">
-        <div class="card">
+        <div class="card section-header-card overview-theme">
           <h2 class="section-title">How to Use This Workbook</h2>
           <p>This workbook is designed as a self-study and teaching support resource. Each part begins with the learning outcomes, followed by explanatory notes and activities. Under each learning outcome, click the relevant tab to read the full teaching answer. Under each activity, click the answer tab to open the memo. In the case study section, each discipline has its own answer tab so that EMS, MITS, and Nursing students can focus on their own role while still seeing the full clinical flow.</p>
           <div class="pill-row">
@@ -337,12 +509,12 @@
       </section>
 
       <section id="anatomy" class="section">
-        <div class="card">
+        <div class="card section-header-card anatomy-theme">
           <h2 class="section-title">Part 1: Anatomy of the Respiratory System</h2>
           <p class="subtle">Focus: structure, organisation, and the relationship between anatomy and gas exchange.</p>
         </div>
 
-        <div class="card">
+        <div class="card anatomy-card">
           <h3>Learning Outcomes</h3>
           <ul>
             <li>Identify structures of the upper and lower respiratory tract.</li>
@@ -393,7 +565,7 @@
           </div>
         </div>
 
-        <div class="card grid-2">
+        <div class="card anatomy-card grid-2">
           <div class="mini-card">
             <h3>Core Explanation</h3>
             <p>The respiratory system is divided into an upper and a lower respiratory tract. The upper respiratory tract includes the nose, nasal cavity, paranasal sinuses, and pharynx. These structures prepare the air before it reaches the lungs by warming it, filtering it, and humidifying it.</p>
@@ -406,7 +578,7 @@
           </div>
         </div>
 
-        <div class="card activity">
+        <div class="card activity anatomy-card">
           <h3>Activity 1: Structure and Function</h3>
           <p><strong>Question 1:</strong> Name the structures that form the upper respiratory tract and the lower respiratory tract.</p>
           <p><strong>Question 2:</strong> Explain the difference between the conducting zone and the respiratory zone.</p>
@@ -434,12 +606,12 @@
       </section>
 
       <section id="physiology" class="section">
-        <div class="card">
+        <div class="card section-header-card physiology-theme">
           <h2 class="section-title">Part 2: Physiology of Breathing and Gas Exchange</h2>
           <p class="subtle">Focus: ventilation, lung volumes, gas transport, and interpretation of normal values.</p>
         </div>
 
-        <div class="card">
+        <div class="card physiology-card">
           <h3>Learning Outcomes</h3>
           <ul>
             <li>Define key respiratory terms, including tidal volume, vital capacity, and lung capacity.</li>
@@ -480,7 +652,7 @@
           </div>
         </div>
 
-        <div class="card grid-2">
+        <div class="card physiology-card grid-2">
           <div class="mini-card">
             <h3>Ventilation and Respiration</h3>
             <p>Pulmonary ventilation is the physical movement of air into and out of the lungs. This includes inhalation and exhalation. External respiration refers to gas exchange between the alveoli and the blood. Internal respiration refers to gas exchange between the blood and the tissues. Cellular respiration is different from both of these, because it refers to the use of oxygen by cells to produce energy in the form of ATP.</p>
@@ -491,7 +663,7 @@
           </div>
         </div>
 
-        <div class="card activity">
+        <div class="card activity physiology-card">
           <h3>Activity 2: Physiology in Context</h3>
           <p><strong>Question 1:</strong> Explain the difference between ventilation, external respiration, internal respiration, and cellular respiration.</p>
           <p><strong>Question 2:</strong> Define tidal volume, vital capacity, and total lung capacity.</p>
@@ -514,12 +686,12 @@
       </section>
 
       <section id="regulation" class="section">
-        <div class="card">
+        <div class="card section-header-card regulation-theme">
           <h2 class="section-title">Part 3: Regulation of Breathing</h2>
           <p class="subtle">Focus: respiratory centres, chemoreceptors, acid–base balance, and clinical signs of distress.</p>
         </div>
 
-        <div class="card">
+        <div class="card regulation-card">
           <h3>Learning Outcomes</h3>
           <ul>
             <li>Identify respiratory centres in the medulla oblongata and pons.</li>
@@ -557,7 +729,7 @@
           </div>
         </div>
 
-        <div class="card activity">
+        <div class="card activity regulation-card">
           <h3>Activity 3: Regulation and Interpretation</h3>
           <p><strong>Question 1:</strong> Identify the respiratory centres and explain their role.</p>
           <p><strong>Question 2:</strong> Explain the difference between central and peripheral chemoreceptors.</p>
@@ -580,12 +752,12 @@
       </section>
 
       <section id="cases" class="section">
-        <div class="card">
+        <div class="card section-header-card cases-theme">
           <h2 class="section-title">Integrated Case Study Series</h2>
           <p class="subtle">Each case follows the clinical flow of EMS first response, MITS diagnostic confirmation, and Nursing care or aftercare.</p>
         </div>
 
-        <div class="card">
+        <div class="card cases-card">
           <div class="case-header">
             <h3>Case 1: Asthma Exacerbation</h3>
             <div class="case-summary"><strong>Scenario:</strong> A 22-year-old patient presents with wheezing, shortness of breath, a respiratory rate of 32 breaths per minute, and an oxygen saturation of 88%.</div>
@@ -612,7 +784,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card cases-card">
           <div class="case-header">
             <h3>Case 2: Pneumonia</h3>
             <div class="case-summary"><strong>Scenario:</strong> A 65-year-old patient presents with fever, productive cough, and an oxygen saturation of 90%.</div>
@@ -639,7 +811,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card cases-card">
           <div class="case-header">
             <h3>Case 3: COPD Exacerbation</h3>
             <div class="case-summary"><strong>Scenario:</strong> A 70-year-old smoker presents with chronic shortness of breath, fatigue, and evidence of carbon dioxide retention.</div>
@@ -666,7 +838,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card cases-card">
           <div class="case-header">
             <h3>Case 4: Pulmonary Embolism</h3>
             <div class="case-summary"><strong>Scenario:</strong> A patient presents with sudden shortness of breath, sharp chest pain, tachycardia, and reduced oxygen saturation.</div>
@@ -693,7 +865,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card cases-card">
           <div class="case-header">
             <h3>Case 5: Pleural Effusion</h3>
             <div class="case-summary"><strong>Scenario:</strong> A patient presents with shortness of breath, reduced chest expansion on one side, dull percussion, and decreased breath sounds.</div>
@@ -720,7 +892,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card cases-card">
           <div class="case-header">
             <h3>Case 6: Respiratory Acidosis</h3>
             <div class="case-summary"><strong>Scenario:</strong> A patient presents with a reduced respiratory rate, raised carbon dioxide level, and low blood pH.</div>
@@ -748,11 +920,156 @@
         </div>
       </section>
 
+      <section id="glossary" class="section">
+        <div class="card section-header-card glossary-theme">
+          <h2 class="section-title">Respiratory Glossary of Terms</h2>
+          <p class="subtle">This glossary is adapted from your respiratory glossary document and converted into HTML for use in the workbook. It provides a quick-reference guide for revision and terminology support.</p>
+        </div>
+
+        <div class="card glossary-card">
+          <h3>Anatomy Terms</h3>
+          <table class="glossary-anatomy">
+            <thead>
+              <tr><th>Term</th><th>Definition</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Upper respiratory tract</td><td>Air passages including the nose, nasal cavity, and pharynx that condition incoming air.</td></tr>
+              <tr><td>Lower respiratory tract</td><td>Airways from the larynx to the lungs that conduct air and support gas exchange.</td></tr>
+              <tr><td>Pharynx</td><td>A shared passage for air and food.</td></tr>
+              <tr><td>Larynx</td><td>A structure that maintains the airway, produces sound, and helps prevent aspiration.</td></tr>
+              <tr><td>Trachea</td><td>An airway supported by cartilage rings that carries air toward the bronchi.</td></tr>
+              <tr><td>Bronchi</td><td>Airways that branch from the trachea into the lungs.</td></tr>
+              <tr><td>Bronchioles</td><td>Smaller airway branches within the lungs.</td></tr>
+              <tr><td>Alveoli</td><td>Tiny air sacs where gas exchange occurs.</td></tr>
+              <tr><td>Respiratory membrane</td><td>The thin barrier across which oxygen and carbon dioxide diffuse.</td></tr>
+              <tr><td>Pleural cavity</td><td>A fluid-filled space that reduces friction during breathing.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card glossary-card">
+          <h3>Physiology Terms</h3>
+          <table class="glossary-physiology">
+            <thead>
+              <tr><th>Term</th><th>Definition</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pulmonary ventilation</td><td>Movement of air into and out of the lungs.</td></tr>
+              <tr><td>Inhalation</td><td>The movement of air into the lungs.</td></tr>
+              <tr><td>Exhalation</td><td>The movement of air out of the lungs.</td></tr>
+              <tr><td>Tidal volume</td><td>The amount of air moved in one normal breath, about 500 mL in an adult.</td></tr>
+              <tr><td>IRV</td><td>Inspiratory reserve volume; extra air that can be inhaled after a normal breath in.</td></tr>
+              <tr><td>ERV</td><td>Expiratory reserve volume; extra air that can be exhaled after a normal breath out.</td></tr>
+              <tr><td>Vital capacity</td><td>The maximum amount of air exhaled after a maximum inhalation.</td></tr>
+              <tr><td>Total lung capacity</td><td>The total amount of air in the lungs after a maximum inhalation.</td></tr>
+              <tr><td>Lung compliance</td><td>The ease with which the lungs expand.</td></tr>
+              <tr><td>Gas exchange</td><td>The movement of oxygen and carbon dioxide between alveoli and blood.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card glossary-card">
+          <h3>Respiration Types</h3>
+          <table class="glossary-respiration">
+            <thead>
+              <tr><th>Term</th><th>Definition</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Ventilation</td><td>Air movement into and out of the lungs.</td></tr>
+              <tr><td>External respiration</td><td>Gas exchange between the lungs and the blood.</td></tr>
+              <tr><td>Internal respiration</td><td>Gas exchange between the blood and body tissues.</td></tr>
+              <tr><td>Cellular respiration</td><td>The production of ATP in cells using oxygen.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card glossary-card">
+          <h3>Gas Transport</h3>
+          <table class="glossary-transport">
+            <thead>
+              <tr><th>Term</th><th>Definition</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Oxygen transport</td><td>The movement of oxygen in blood, mainly bound to haemoglobin.</td></tr>
+              <tr><td>Carbon dioxide transport</td><td>The movement of carbon dioxide in blood, mainly as bicarbonate.</td></tr>
+              <tr><td>Oxyhaemoglobin</td><td>Haemoglobin bound to oxygen.</td></tr>
+              <tr><td>Oxyhaemoglobin curve</td><td>The relationship between oxygen and haemoglobin binding.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card glossary-card">
+          <h3>Regulation Terms</h3>
+          <table class="glossary-regulation">
+            <thead>
+              <tr><th>Term</th><th>Definition</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Respiratory centres</td><td>Brain regions that control breathing.</td></tr>
+              <tr><td>Chemoreceptors</td><td>Receptors that detect changes in carbon dioxide, oxygen, and pH.</td></tr>
+              <tr><td>Central chemoreceptors</td><td>Chemoreceptors that mainly respond to carbon dioxide and pH changes.</td></tr>
+              <tr><td>Peripheral chemoreceptors</td><td>Chemoreceptors that mainly respond to low oxygen levels.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card glossary-card">
+          <h3>Clinical Terms</h3>
+          <table class="glossary-clinical">
+            <thead>
+              <tr><th>Term</th><th>Definition</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Hypoxia</td><td>Low oxygen levels in tissues or blood.</td></tr>
+              <tr><td>Hypercapnia</td><td>High carbon dioxide levels in the blood.</td></tr>
+              <tr><td>Respiratory acidosis</td><td>Low blood pH caused by increased carbon dioxide.</td></tr>
+              <tr><td>Respiratory alkalosis</td><td>High blood pH caused by reduced carbon dioxide.</td></tr>
+              <tr><td>Cyanosis</td><td>A bluish discoloration caused by low oxygenation.</td></tr>
+              <tr><td>Tachypnoea</td><td>Fast breathing.</td></tr>
+              <tr><td>Bradypnoea</td><td>Slow breathing.</td></tr>
+              <tr><td>Apnoea</td><td>Temporary absence of breathing.</td></tr>
+              <tr><td>Hyperventilation</td><td>Excess breathing that lowers carbon dioxide.</td></tr>
+              <tr><td>Kussmaul breathing</td><td>Deep breathing seen in acidosis.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card glossary-card">
+          <h3>Examination Terms</h3>
+          <table class="glossary-exam">
+            <thead>
+              <tr><th>Term</th><th>Definition</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Palpation</td><td>Assessing chest movement with the hands.</td></tr>
+              <tr><td>Percussion</td><td>Tapping the chest to assess underlying tissue density.</td></tr>
+              <tr><td>Auscultation</td><td>Listening to breath sounds with a stethoscope.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card glossary-card">
+          <h3>Normal Values</h3>
+          <table class="glossary-values">
+            <thead>
+              <tr><th>Term</th><th>Definition</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Respiratory rate</td><td>12–20 breaths per minute in a normal adult.</td></tr>
+              <tr><td>PaO2</td><td>80–100 mmHg.</td></tr>
+              <tr><td>PaCO2</td><td>35–45 mmHg.</td></tr>
+              <tr><td>pH</td><td>7.35–7.45.</td></tr>
+              <tr><td>SpO2</td><td>95–100%.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <section id="videos" class="section">
-        <div class="card">
+        <div class="card section-header-card videos-theme">
           <h2 class="section-title">Useful Videos and Resources</h2>
           <p class="subtle">These links support the workbook and can be used when students need another explanation in a different voice or format.</p>
-          <div class="resource-list">
+          <div class="resource-list videos-card">
             <table>
               <thead>
                 <tr>
